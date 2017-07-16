@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="openTCLModelStoreContainer" CdmEntityContainer="openTCLEntities">
+    <EntitySetMapping Name="ShareTravelPackage">
+      <EntityTypeMapping TypeName="openTCLModel.ShareTravelPackage">
+        <MappingFragment StoreEntitySet="ShareTravelPackage">
+          <ScalarProperty Name="STP_Id" ColumnName="STP_Id" />
+          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="TravelDateTime" ColumnName="TravelDateTime" />
+          <ScalarProperty Name="Places" ColumnName="Places" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShareTravelPlace">
+      <EntityTypeMapping TypeName="openTCLModel.ShareTravelPlace">
+        <MappingFragment StoreEntitySet="ShareTravelPlace">
+          <ScalarProperty Name="PType" ColumnName="PType" />
+          <ScalarProperty Name="STP_Id" ColumnName="STP_Id" />
+          <ScalarProperty Name="Place_Id" ColumnName="Place_Id" />
+          <ScalarProperty Name="PlaceName" ColumnName="PlaceName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

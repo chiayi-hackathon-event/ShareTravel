@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="openTCLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ShareTravelPackage">
+    <Key>
+      <PropertyRef Name="STP_Id" />
+    </Key>
+    <Property Name="STP_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageName" Type="varchar" MaxLength="140" Nullable="false" />
+    <Property Name="Memo" Type="varchar" MaxLength="140" Nullable="false" />
+    <Property Name="TravelDateTime" Type="datetime" Nullable="false" />
+    <Property Name="Places" Type="varchar" MaxLength="2000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ShareTravelPlace">
+    <Key>
+      <PropertyRef Name="STP_Id" />
+    </Key>
+    <Property Name="STP_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Place_Id" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="PlaceName" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Rating" Type="float" Nullable="false" />
+    <Property Name="Lat" Type="float" Nullable="false" />
+    <Property Name="Lng" Type="float" Nullable="false" />
+    <Property Name="PType" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="openTCLModelStoreContainer">
+    <EntitySet Name="ShareTravelPackage" EntityType="Self.ShareTravelPackage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShareTravelPlace" EntityType="Self.ShareTravelPlace" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

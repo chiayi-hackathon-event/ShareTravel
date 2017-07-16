@@ -1,0 +1,62 @@
+﻿
+@{
+
+}
+
+
+<style>
+    .body {
+        background-color: #aaa;
+    }
+
+    .card {
+        margin: 9px;
+        background-color: white;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+
+        .card > header,
+        .card div,
+        .card section,
+        .card footer {
+            padding: 1em;
+            
+        }
+
+        .card > header,
+        .card .card-header {
+            vertical-align: middle;
+            font-size:16px;
+            background-color: 		#005AB5;
+            color: white;
+            font-weight: bold;
+        }
+</style>
+
+<h2>比較行程</h2>
+
+@using (Html.BeginForm("ComparePackage", "Travel", FormMethod.Post))
+{
+    int i = 0;
+    foreach (ShareTravel.Models.ShareTravelPackage item in Model)
+    {
+        <text>
+
+            <div class="card">
+                <header>
+                    <input type="checkbox" name="sp[@i].Selected" value="true" style="display:inline; vertical-align:middle;" />
+                     @item.PackageName
+                </header>
+                <div class="card-block">
+
+                    <p class="card-text">@item.Memo</p>
+                    <input type="hidden" name="sp[@i].PackageName" value="@item.PackageName" />
+                </div>
+            </div>
+        </text>
+        i++;
+    }
+    <input type="submit" value="Compare" class="btn" style="background:#005AB5; color:white;" />
+}
+
+

@@ -1,0 +1,585 @@
+﻿
+@{
+    ViewBag.Title = "ComparePackage";
+}
+
+<style>
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+    body {
+        font-family: "Microsoft JhengHei", "Helvetica", "Roboto", "Arial", sans-serif;
+        color: #5e5d52;
+    }
+
+    #map {
+        height: 500px;
+        width: 100%;
+    }
+
+    a {
+        color: #337aa8;
+    }
+
+        a:hover, a:focus {
+            color: #4b8ab2;
+        }
+
+    .container1 {
+        margin: 5% 3%;
+    }
+
+    @@media (min-width: 48em) {
+        .container1 {
+            margin: 2%;
+        }
+    }
+
+    @@media (min-width: 75em) {
+        .container1 {
+            margin: 2em auto;
+            max-width: 75em;
+        }
+    }
+
+    .responsive-table {
+        width: 100%;
+        margin-bottom: 1.5em;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table {
+            font-size: .9em;
+        }
+    }
+
+    @@media (min-width: 62em) {
+        .responsive-table {
+            font-size: 1em;
+        }
+    }
+
+    .responsive-table thead {
+        position: absolute;
+        clip: rect(1px 1px 1px 1px);
+        /* IE6, IE7 */
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 0;
+        border: 0;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table thead {
+            position: relative;
+            clip: auto;
+            height: auto;
+            width: auto;
+            overflow: auto;
+        }
+    }
+
+    .responsive-table thead th {
+        background-color: #5151A2;
+        border: 1px solid #5151A2;
+        font-weight: normal;
+        text-align: center;
+        color: white;
+    }
+
+        .responsive-table thead th:first-of-type {
+            text-align: left;
+        }
+
+    .responsive-table tbody,
+    .responsive-table tr,
+    .responsive-table th,
+    .responsive-table td {
+        display: block;
+        padding: 0;
+        text-align: left;
+        white-space: normal;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tr {
+            display: table-row;
+        }
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+        padding: .5em;
+        vertical-align: middle;
+    }
+
+    @@media (min-width: 30em) {
+        .responsive-table th,
+        .responsive-table td {
+            padding: .75em .5em;
+        }
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table th,
+        .responsive-table td {
+            display: table-cell;
+            padding: .5em;
+        }
+    }
+
+    @@media (min-width: 62em) {
+        .responsive-table th,
+        .responsive-table td {
+            padding: .75em .5em;
+        }
+    }
+
+    @@media (min-width: 75em) {
+        .responsive-table th,
+        .responsive-table td {
+            padding: .75em;
+        }
+    }
+
+    .responsive-table caption {
+        margin-bottom: 1em;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table caption {
+            font-size: 1.5em;
+        }
+    }
+
+    .responsive-table tfoot {
+        font-size: .8em;
+        font-style: italic;
+    }
+
+    @@media (min-width: 62em) {
+        .responsive-table tfoot {
+            font-size: .9em;
+        }
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tbody {
+            display: table-row-group;
+        }
+    }
+
+    .responsive-table tbody tr {
+        margin-bottom: 1em;
+        border: 2px solid #5151A2;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tbody tr {
+            display: table-row;
+            border-width: 1px;
+        }
+    }
+
+    .responsive-table tbody tr:last-of-type {
+        margin-bottom: 0;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tbody tr:nth-of-type(even) {
+            background-color: rgba(94, 93, 82, 0.1);
+        }
+    }
+
+    .responsive-table tbody th[scope="row"] {
+        background-color: #5151A2;
+        color: white;
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tbody th[scope="row"] {
+            background-color: transparent;
+            color: #5e5d52;
+            text-align: left;
+        }
+    }
+
+    .responsive-table tbody td {
+        text-align: right;
+    }
+
+    @@media (min-width: 30em) {
+        .responsive-table tbody td {
+            border-bottom: 1px solid #5151A2;
+        }
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tbody td {
+            text-align: center;
+        }
+    }
+
+    .responsive-table tbody td[data-type=currency] {
+        text-align: right;
+    }
+
+    .responsive-table tbody td[data-title]:before {
+        content: attr(data-title);
+        float: left;
+        font-size: .8em;
+        color: rgba(94, 93, 82, 0.75);
+    }
+
+    @@media (min-width: 30em) {
+        .responsive-table tbody td[data-title]:before {
+            font-size: .9em;
+        }
+    }
+
+    @@media (min-width: 48em) {
+        .responsive-table tbody td[data-title]:before {
+            content: none;
+        }
+    }
+
+    .driving {
+        background-color: orange;
+        color: white;
+        padding-left: 5px;
+        padding-right: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        display:block;
+    }
+
+    .transit {
+        background-color: #FF0080;
+        color: white;
+        padding-left: 5px;
+        padding-right: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        display:block;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8evo6K_89ZLTKCq4sJVG-RCQfjIqLa2c"></script>
+
+
+<h2>比較行程</h2>
+
+<button class="btn btn-warning" onclick="toggleSpan('spanDriving')"><i class="fa fa-car" aria-hidden="true"></i>TAXI</button>
+<button class="btn btn-danger" style="background:#FF0080;" onclick="toggleSpan('spanTransit')"><i class="fa fa-bus" aria-hidden="true"></i>BUS</button>
+
+<table id="excelDataTable" class="responsive-table"></table>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                INFO
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <img src="//placehold.it/1000x600" class="img-responsive" id="modalImage">
+                <div id="modalName"></div>
+                <div id="modalAddress"></div>
+                <div id="modalRating"></div>
+                <div id="map"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var myList = [ @Html.Raw(ViewBag.JSON)];
+
+    // Builds the HTML Table out of myList.
+    function buildHtmlTable(selector) {
+        var columns = addAllColumnHeaders(myList, selector);
+
+        for (var i = 0; i < myList.length; i++) {
+            var row$ = $('<tr/>');
+            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+                var cellValue = myList[i][columns[colIndex]];
+                if (cellValue == null) cellValue = "";
+                row$.append($('<td/>').html(cellValue));
+            }
+            $(selector).append(row$);
+        }
+    }
+
+    // Adds a header row to the table and returns the set of columns.
+    // Need to do union of keys from all records as some records may not contain
+    // all records.
+    function addAllColumnHeaders(myList, selector) {
+        var columnSet = [];
+        var headerTr$ = $('<thead/>');
+
+        for (var i = 0; i < myList.length; i++) {
+            var rowHash = myList[i];
+            for (var key in rowHash) {
+                if ($.inArray(key, columnSet) == -1) {
+                    columnSet.push(key);
+                    headerTr$.append($('<th/>').html(key));
+                }
+            }
+        }
+        $(selector).append(headerTr$);
+
+        return columnSet;
+    }
+
+    function update(imgUrl, addr, rat, pName) {
+        $("#modalImage").show();
+
+        $("#modalImage").attr("src", imgUrl);
+        $("#modalAddress").text(addr);
+        $("#modalName").text(pName);
+        $("#modalRating").text(rat);
+        $("#map").hide();
+    }
+
+    //Google direction service
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map,centerLocation;
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        centerLocation = new google.maps.LatLng(25.0157257, 121.531593);
+        var mapOptions = {
+            zoom: 12,
+            center: centerLocation
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsDisplay.setMap(map);
+
+    }
+
+    var directionDrivingArr = []; // directionArr is DRIVING mode
+    var directionTransitArr = []
+
+    function updateDirections(lat1, lng1, lat2, lng2, tagId, mode) {
+        // 準備 request for directionsService
+        var start = new google.maps.LatLng(lat1, lng1);
+        var end = new google.maps.LatLng(lat2, lng2);
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: mode
+        };
+        //route
+        directionsService.route(request, function (result, status) {
+            if (status == 'OK') {
+                if (mode == 'DRIVING') {
+                    directionDrivingArr.push({
+                        lat1: lat1,
+                        lng1: lng1,
+                        lat2: lat2,
+                        lng2: lng2,
+                        directionResult: result
+                    });
+
+                    var dText = result.routes[0].legs[0].distance.text + '';
+                    var kMile = parseFloat(dText.substring(0, dText.indexOf('.') + 2));
+
+                    var taxiFare = Math.round((kMile - 1.5) / 0.25 * 5 + 85);
+                    if (kMile <= 1.5) {
+                        taxiFare = 85;
+                    }
+                    $('#' + tagId + '').text(dText + '(' + result.routes[0].legs[0].duration.text + ')$' + taxiFare);
+
+
+                }
+                else if (mode == 'TRANSIT') {
+                    directionTransitArr.push({
+                        lat1: lat1,
+                        lng1: lng1,
+                        lat2: lat2,
+                        lng2: lng2,
+                        directionResult: result
+                    });
+                    var fare = result.routes[0].fare;
+                    if (fare == undefined) {
+                        fare = '';
+                    }
+                    else {
+                        fare = fare.text;
+                    }
+                    $('#' + tagId + '').text(result.routes[0].legs[0].distance.text + '(' + result.routes[0].legs[0].duration.text + ')' + fare);
+                    $('#' + tagId + '').attr("fare", fare);
+
+                }
+            }
+            else {
+                console.log('direction service response error...' + status);
+            }
+        });
+
+    }
+
+    function mercatorInterpolate(map, latLngFrom, latLngTo, fraction) {
+        // Get projected points
+        var projection = map.getProjection();
+        var pointFrom = projection.fromLatLngToPoint(latLngFrom);
+        var pointTo = projection.fromLatLngToPoint(latLngTo);
+        // Adjust for lines that cross the 180 meridian
+        if (Math.abs(pointTo.x - pointFrom.x) > 128) {
+            if (pointTo.x > pointFrom.x)
+                pointTo.x -= 256;
+            else
+                pointTo.x += 256;
+        }
+        // Calculate point between
+        var x = pointFrom.x + (pointTo.x - pointFrom.x) * fraction;
+        var y = pointFrom.y + (pointTo.y - pointFrom.y) * fraction;
+        var pointBetween = new google.maps.Point(x, y);
+        // Project back to lat/lng
+        var latLngBetween = projection.fromPointToLatLng(pointBetween);
+        return latLngBetween;
+    }
+
+    function updateMap(lat1, lng1, lat2, lng2, pName1, pName2, tIdStr) {
+        $("#map").show();
+
+        var startLatLng = new google.maps.LatLng(lat1, lng1); // interpolate
+        var endLatLng = new google.maps.LatLng(lat2, lng2); // interpolate
+
+        centerLocation = mercatorInterpolate(map, startLatLng, endLatLng, 0.5);
+        if (tIdStr.indexOf('spanDriving') > -1) {
+            for (var x = 0, len = directionDrivingArr.length; x < len ; x++) {
+                if (lat1 == directionDrivingArr[x].lat1 && lat2 == directionDrivingArr[x].lat2) {
+                    directionsDisplay.setDirections(directionDrivingArr[x].directionResult);
+                    break;
+                }
+            }
+        }
+        else if (tIdStr.indexOf('spanTransit') > -1) {
+            for (var x = 0, len = directionTransitArr.length; x < len ; x++) {
+                if (lat1 == directionTransitArr[x].lat1 && lat2 == directionTransitArr[x].lat2) {
+                    directionsDisplay.setDirections(directionTransitArr[x].directionResult);
+                    break;
+                }
+            }
+        }
+
+        $("#modalName").text(pName1 + ' -> ' + pName2);
+        $("#modalImage").hide();
+        $("#modalAddress").text('');
+        $("#modalRating").text('');
+        $('#myModal').modal('show');
+    }
+
+    //because of the OVER_QUERY_LIMIT , 
+    var queryTransit = false;
+    function toggleSpan(spanIdStr) {
+        var span = $("span");
+        $("td").find(span).each(function () {
+            var tId = $(this).attr("id");
+            var tIdStr = tId + '';
+            
+            if (spanIdStr == 'spanDriving' && tIdStr.indexOf('spanDriving') > -1) {
+                $('#' + tId).toggle();
+            }
+            else if (spanIdStr == 'spanTransit' && tIdStr.indexOf('spanTransit') > -1) {
+
+                var fare = $(this).attr("fare");
+                if (fare.indexOf('.') == -1 ) {
+                    console.log('query transit...');
+                    var lat1 = $(this).attr("lat1");
+                    var lng1 = $(this).attr("lng1");
+                    var lat2 = $(this).attr("lat2");
+                    var lng2 = $(this).attr("lng2");
+                    var currentPName = $(this).attr("currentPName");
+                    var nextPName = $(this).attr("nextPName");
+                    updateDirections(lat1, lng1, lat2, lng2, tId, 'TRANSIT');
+                    var newOnclick = 'updateMap("' + lat1 + '","' + lng1 + '","' + lat2 + '","' + lng2 + '","' + currentPName + '","' + nextPName + '","' + tIdStr + '")';
+                    $(this).attr("onclick", newOnclick);
+                    
+                }
+                $('#' + tId).toggle();
+            }
+
+        });
+    }
+
+
+
+
+    $(document).ready(function () {
+        console.log("Load table...");
+        buildHtmlTable('#excelDataTable');
+
+        // 只對每個 td 去檢查 button, 避免影響到其他版面上的 button
+
+        var btn = $("button");
+        $("td").find(btn).each(function () {
+            var image = $(this).attr("image");
+            var address = $(this).attr("address");
+            var rating = $(this).attr("rating");
+            var pName = $(this).attr("placeName");
+
+            var newOnclick = 'update("' + image + '","' + address + '","'+ rating +'","' + pName + '")';
+            $(this).attr("onclick", newOnclick);
+
+        });
+
+        // 只對每個 td 去檢查 span, 避免影響到其他版面上的 span
+
+        var span = $("span");
+        $("td").find(span).each(function () {
+            var tId = $(this).attr("id");
+            var tIdStr = tId + '';
+
+
+            var lat1 = $(this).attr("lat1");
+            var lng1 = $(this).attr("lng1");
+            var lat2 = $(this).attr("lat2");
+            var lng2 = $(this).attr("lng2");
+            var currentPName = $(this).attr("currentPName");
+            var nextPName = $(this).attr("nextPName");
+
+            if (tIdStr.indexOf('spanDriving') > -1) {
+                updateDirections(lat1, lng1, lat2, lng2, tId, 'DRIVING');
+            }
+            else if (tIdStr.indexOf('spanTransit') > -1) {
+                //  updateDirections(lat1, lng1, lat2, lng2, tId, 'TRANSIT');
+                $(this).hide();
+             }
+
+            var newOnclick = 'updateMap("' + lat1 + '","' + lng1 + '","' + lat2 + '","' + lng2 + '","' + currentPName + '","' + nextPName + '","' + tIdStr + '")';
+            $(this).attr("onclick", newOnclick);
+        });
+
+        console.log("Init map...");
+        $("#myModal").on('shown.bs.modal', function () {
+            google.maps.event.trigger(map, "resize"); // map 在 modal 要 resize 否則會有問題
+            map.setCenter(centerLocation);
+            map.setZoom(14);
+        });
+        initialize();
+
+    });
+
+
+
+</script>

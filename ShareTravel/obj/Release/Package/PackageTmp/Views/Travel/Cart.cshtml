@@ -1,0 +1,350 @@
+﻿@using ShareTravel.Models;
+@{
+
+
+}
+
+
+
+
+    <link href="~/Content/bootstrap-dialog.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-dialog.min.js"></script>
+    <style>
+        body {
+            background: #ECF5FF;
+            margin: 2rem;
+        }
+
+        .blog-card {
+            transition: height 0.3s ease;
+            -webkit-transition: height 0.3s ease;
+            background: #fff;
+            border-radius: 3px;
+            box-shadow: 0 3px 7px -3px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 1.6%;
+            overflow: hidden;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.45em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+            .blog-card:hover .details {
+                left: 0;
+            }
+
+            .blog-card:hover.alt .details {
+                right: 0;
+            }
+
+            .blog-card.alt .details {
+                right: -100%;
+                left: inherit;
+            }
+
+            .blog-card .photo {
+                height: 200px;
+                position: relative;
+            }
+
+            .blog-card .details {
+                transition: all 0.3s ease;
+                -webkit-transition: all 0.3s ease;
+                background: rgba(0, 0, 0, 0.6);
+                box-sizing: border-box;
+                color: #fff;
+                font-family: "Open Sans";
+                list-style: none;
+                margin: 0;
+                padding: 10px 15px;
+                height: 200px;
+                /*POSITION*/
+                position: absolute;
+                top: 0;
+                left: -100%;
+            }
+
+                .blog-card .details > li {
+                    padding: 3px 0;
+                }
+
+                .blog-card .details li:before, .blog-card .details .tags ul:before {
+                    font-family: FontAwesome;
+                    margin-right: 10px;
+                    vertical-align: middle;
+                }
+
+                .blog-card .details .author:before {
+                    content: "\f007";
+                }
+
+                .blog-card .details .date:before {
+                    content: "\f133";
+                }
+
+                .blog-card .details .tags ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                    .blog-card .details .tags ul:before {
+                        content: "\f02b";
+                    }
+
+                .blog-card .details .tags li {
+                    display: inline-block;
+                    margin-right: 3px;
+                }
+
+                .blog-card .details a {
+                    color: inherit;
+                    border-bottom: 1px dotted;
+                }
+
+                    .blog-card .details a:hover {
+                        color: #75D13B;
+                    }
+
+            .blog-card .description {
+                padding: 10px;
+                box-sizing: border-box;
+                position: relative;
+            }
+
+                .blog-card .description h1 {
+                    font-family: "Microsoft JhengHei","Roboto";
+                    line-height: 1em;
+                    margin: 0 0 10px 0;
+                }
+
+                .blog-card .description h2 {
+                    color: #9b9b9b;
+                    font-family: "Open Sans";
+                    line-height: 1.2em;
+                    text-transform: uppercase;
+                    font-size: 1em;
+                    font-weight: 400;
+                    margin: 1.2% 0;
+                    margin-top: 20px;
+                }
+
+                .blog-card .description p {
+                    position: relative;
+                    margin: 0;
+                    padding-top: 20px;
+                }
+
+                    .blog-card .description p:after {
+                        content: "";
+                        background: #C5CAE9;
+                        height: 1px;
+                        width: 400px;
+                        /*POSITION*/
+                        position: absolute;
+                        top: 6px;
+                        left: 0;
+                    }
+
+                .blog-card .description a {
+                    color: #C5CAE9;
+                    margin-bottom: 10px;
+                    float: right;
+                }
+
+                    .blog-card .description a:after {
+                        transition: all 0.3s ease;
+                        -webkit-transition: all 0.3s ease;
+                        content: "\f061";
+                        font-family: FontAwesome;
+                        margin-left: -10px;
+                        opacity: 0;
+                        vertical-align: middle;
+                    }
+
+                    .blog-card .description a:hover:after {
+                        margin-left: 5px;
+                        opacity: 1;
+                    }
+
+        @@media screen and (min-width: 600px) {
+            .blog-card {
+                height: 200px;
+                max-width: 600px;
+            }
+
+                .blog-card:hover .photo {
+                    transform: rotate(5deg) scale(1.3);
+                }
+
+                .blog-card:hover.alt .photo {
+                    transform: rotate(-5deg) scale(1.3);
+                }
+
+                .blog-card.alt .details {
+                    padding-left: 30px;
+                }
+
+                .blog-card.alt .description {
+                    float: right;
+                }
+
+                    .blog-card.alt .description:before {
+                        transform: skewX(5deg);
+                        right: -15px;
+                        left: inherit;
+                    }
+
+                .blog-card.alt .photo {
+                    float: right;
+                }
+
+                .blog-card .photo {
+                    transition: all 0.5s ease;
+                    -webkit-transition: all 0.5s ease;
+                    float: left;
+                    height: 100%;
+                    width: 40%;
+                }
+
+                .blog-card .details {
+                    width: 40%;
+                }
+
+                .blog-card .description {
+                    float: left;
+                    width: 60%;
+                    z-index: 0;
+                }
+
+                    .blog-card .description:before {
+                        transform: skewX(-5deg);
+                        content: "";
+                        background: #fff;
+                        width: 100%;
+                        height: 200px;
+                        z-index: -1;
+                        /*POSITION*/
+                        position: absolute;
+                        left: -15px;
+                        top: 0;
+                        bottom: 0;
+                    }
+        }
+    </style>
+
+
+    <form action="/Travel/CreatePackage" id="createPackage" method="post">
+        <div class="form-group">
+            <div class="col-md-12">
+                行程名稱
+                <input class="form-control" type="text" name="packageName" id="packageName" value="" onchange="updatePackage();" />
+
+                備註
+                <input class="form-control" type="text" name="packageMemo" id="packageMemo" value="" onchange="updatePackage();" />
+            </div>
+        </div>
+        @{
+
+            if (Model != null)
+            {
+                int i = 0;
+                foreach (var item in Model)
+                {
+
+                    <text>
+
+                        <div class="blog-card">
+                            <div class="photo">
+                                <div style="background: url('@item.Image') center no-repeat; height:200px;"></div>
+                            </div>
+                            <div class="description">
+                                <h1>@item.Name</h1>
+                                <h2><i class="fa fa-star fa-lg" style="color:#ff0000" aria-hidden="true">@item.Rating</i></h2>
+                                <p><i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>@item.Address</p>
+                                <!--
+                                <p><i class="fa fa-street-view fa-lg" aria-hidden="true"></i>@@item.Distance</p>
+                                 -->
+                            </div>
+                        </div>
+                        <input type="hidden" name="packageForm[@i].PlaceName" value="@item.Name" />
+                        <input type="hidden" name="packageForm[@i].Image" value="@item.Image" />
+                        <input type="hidden" name="packageForm[@i].Address" value="@item.Address" />
+                        <input type="hidden" name="packageForm[@i].Rating" value="@item.Rating" />
+                        <input type="hidden" name="packageForm[@i].Place_Id" value="@item.Place_Id" />
+                        <input type="hidden" name="packageForm[@i].Lat" value="@item.Lat" />
+                        <input type="hidden" name="packageForm[@i].Lng" value="@item.Lng" />
+                        <input type="hidden" name="packageForm[@i].PackageName" id="PackageName_@i" value="" />
+                        <input type="hidden" name="packageForm[@i].PackageMemo" id="PackageMemo_@i" value="" />
+                        <input type="hidden" name="packageForm[@i].PType" id="PackageMemo_@i" value="@item.PType" />
+
+                    </text>
+                    i++;
+                }
+            }
+
+
+        }
+    </form>
+<button class="btn btn-warning" id="publish" onclick="javascript:confirmPublish($('#packageName').val());">Publish</button>
+<button class="btn btn-warning" id="clear" onclick="location.href = '/Travel/Cart?command=clear'">clear</button>
+
+
+
+    <script type="text/javascript">
+        function updatePackage() {
+
+            @{
+                if (Model != null) {
+                    int j = 0;
+                    foreach (var item in Model)
+                    {
+                       <text>
+                        $("#PackageName_@j").val($("#packageName").val());
+                        $("#PackageMemo_@j").val($("#packageMemo").val());
+                        </text>
+                        j++;
+                    }
+
+                }
+
+
+           }
+        }
+
+
+        function confirmPublish(pName) {
+
+
+            BootstrapDialog.confirm({
+                title: '注意',
+                message: '確定送出 ' + pName + ' ?',
+                type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                closable: true, // <-- Default value is false
+                draggable: true, // <-- Default value is false
+                btnCancelLabel: '取消', // <-- Default value is 'Cancel',
+                btnOKLabel: '確定', // <-- Default value is 'OK',
+                btnOKClass: 'btn-warning', // <-- If you didn't specify it, dialog type will be used,
+                callback: function (result) {
+                    // result will be true if button was click, while it will be false if users close the dialog directly.
+                    if (result) {
+                        if (pName == '') {
+                            alert("pname is null");
+
+                        } else {
+                            $("#createPackage").submit();
+                            //alert("submit");
+                        }
+
+                    } else {
+                    }
+                }
+            });
+        }
+
+
+
+    </script>
+
+

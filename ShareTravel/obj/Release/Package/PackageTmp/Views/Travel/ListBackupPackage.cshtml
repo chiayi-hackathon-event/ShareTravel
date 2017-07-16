@@ -1,0 +1,131 @@
+﻿@using ShareTravel.Models;
+@{
+    ShareTravelPlace[] stplces = ViewBag.STPlaces;
+}
+
+
+<style>
+    .body {
+        background-color: #aaa;
+    }
+
+    .card {
+        margin: 9px;
+        background-color: white;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+
+        .card > header,
+        .card div,
+        .card section,
+        .card footer {
+            padding: 1em;
+        }
+
+        .card > header,
+        .card .card-header {
+            background-color: #F75000;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+    mySpan {
+        display: inline-block;
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        vertical-align: middle;
+    }
+</style>
+
+<h2>行程與備案清單</h2>
+
+@{
+    int i = 0;
+    foreach (ShareTravel.Models.ShareTravelPackage item in Model)
+    {
+
+        int j = 0;
+
+
+        string[] places = item.Places.Split(';');
+        //ShareTravelPlace place;
+        string packagePlaceStr = "";
+        foreach (var pItem in places)
+        {
+            var place = from s in stplces
+                        where s.Place_Id == pItem
+                        select s;
+            ShareTravelPlace p = place.First();
+
+
+            //<mySpan style='background: url(\""+ bgImg +"\")'></mySpan>
+
+            if (j == places.Length - 1)
+            {
+                //packagePlaceStr += "<i class=\"fa fa-map-marker fa-lg\" aria-hidden=\"true\" style='color:#484891; '>" + p.PlaceName + " </i>";
+                packagePlaceStr += p.PlaceName;
+
+            }
+            else
+            {
+                //packagePlaceStr += "<i class=\"fa fa-map-marker fa-lg\" aria-hidden=\"true\" style='color:#484891; '>" +  p.PlaceName + " </i><i class=\"fa fa-arrow-right\" aria-hidden=\"true\" style='padding-right:1em; padding-left:1em;'> </i>";
+                packagePlaceStr += p.PlaceName + " </i><i class=\"fa fa-arrow-circle-right\" aria-hidden=\"true\" style='padding-right:1em; padding-left:1em;'> </i>";
+
+            }
+            j++;
+        }
+
+        string headerBgColor = "#F75000";
+        if (i % 2 == 0)
+        {
+            headerBgColor = "#F75000";
+        }
+        else
+        {
+            headerBgColor = "#F00078";
+        }
+
+        <text>
+<div class="col-md-6">
+    <div class="card">
+        <header style="background:@headerBgColor ;">
+
+            @item.PackageName
+            <a href="/Travel/DeletePackage?stp_Id=@item.STP_Id">
+                <i class="fa fa-trash-o" aria-hidden="true" style="float:right; color:white;"></i>
+            </a>
+        </header>
+        <div class="card-block">
+            <div>@Html.Raw(packagePlaceStr)</div>
+            <p class="card-text" style="text-align:right">
+                @item.Memo
+                <a href="/Travel/Package?packageName=@item.PackageName" class="btn" style="background:@headerBgColor; color:white;"><i class="fa fa-search" aria-hidden="true"></i></a>
+            </p>
+
+            <input type="hidden" name="sp[@i].PackageName" value="@item.PackageName" />
+        </div>
+    </div>
+</div>
+        </text>
+
+
+
+        
+
+
+
+
+
+        i++;
+    }
+
+}
+
+

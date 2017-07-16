@@ -1,0 +1,80 @@
+﻿#canvas-wrap {
+    position:relative;
+}
+
+
+#canvas-wrap draw {
+    /*
+   display: block;
+
+        class="col-md-8" makes the width
+
+    */
+
+    position:absolute; top:0; left:0; z-index:0;
+    
+}
+
+#draw:fullscreen {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#progress {
+  margin-bottom: 0px;
+}
+
+#progressbar,
+#bufferbar {
+	cursor:pointer
+}
+
+.jumbotron {
+  padding-bottom:0px !important;
+  padding-top: 10px !important;
+}
+
+#map {
+    /*  position:absolute; top:20px; left:30px;
+        display: block;
+    */
+    position:absolute; top:20px; right:20px; z-index:10;
+	height: 250px;
+    width:250px;
+    
+}
+
+.loading{
+	background: #ccc url(../images/load.gif) center center no-repeat !important;
+}
+
+.loading div {
+	display: none;
+}
+
+/* hide the directions from google - HACKY - */
+.adp {
+	display:none;
+}
+
+.rss-link {
+  background: url(../images/rss-icon.png) no-repeat;
+  padding-left: 20px;
+  float: right;
+}
+
+.fb-like {
+  top: -8px;
+  margin-right: 10px;
+}
+
+#twitter-widget-0 {
+  position:relative;
+  top: -3px;
+}
+
+.netlog {
+  position:relative;
+  top:-9px;
+}

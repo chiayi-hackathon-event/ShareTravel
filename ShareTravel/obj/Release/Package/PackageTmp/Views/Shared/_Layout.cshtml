@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShareTravel</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background: #4A4AFF; border-color:transparent;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ShareTravel", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="border-color:transparent;">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink("規劃行程", "ListPlace", "Travel")</li>
+                    
+                    <li>@Html.ActionLink("行程清單", "ListPackage", "Travel")</li>
+                    <li>@Html.ActionLink("備案清單", "ListBackupPackage", "Travel")</li>
+                    <li>@Html.ActionLink("比較行程", "ListComparePackage", "Travel")</li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @{ 
+                            int count = 0;
+                            List<ShareTravel.Models.Place> pList = (List<ShareTravel.Models.Place>)Session["cart"];
+                            if (pList != null) {
+                                count = pList.Count;
+                            }
+                        }
+                        <a href="/Travel/Cart"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>(@count)</a>
+                        
+
+                    </li>
+                </ul>
+                    <!--Html.Partial("_LoginPartial")-->
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ShareTravel</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

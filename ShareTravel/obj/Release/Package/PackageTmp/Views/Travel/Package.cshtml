@@ -1,0 +1,611 @@
+﻿@using ShareTravel.Models;
+@{
+    //Layout = null;
+}
+
+
+    <link href="~/Content/c.css" rel="stylesheet" />
+    <style>
+        section {
+            padding: 50px 0;
+        }
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        body {
+            /*
+                            font-family: 'Roboto';
+            font-size: 17px;
+            */
+
+            font-weight: 400;
+            background-color: #eee;
+        }
+
+        h1 {
+            font-size: 200%;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 400;
+        }
+
+        header {
+            background: #3F51B5;
+            color: #FFFFFF;
+            padding: 100px 0;
+        }
+
+            header p {
+                /*
+                                    font-family: 'Allura';
+                */
+
+                color: rgba(255, 255, 255, 0.2);
+                margin-bottom: 0;
+                font-size: 60px;
+                margin-top: -30px;
+            }
+
+        .timeline {
+            position: relative;
+        }
+
+            .timeline::before {
+                content: '';
+                background: #C5CAE9;
+                width: 5px;
+                height: 95%;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+        .timeline-item {
+            width: 100%;
+            margin-bottom: 70px;
+        }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                float: right;
+                padding: 40px 30px 10px 30px;
+            }
+
+                .timeline-item:nth-child(even) .timeline-content .date {
+                    right: auto;
+                    left: 0;
+                }
+
+                .timeline-item:nth-child(even) .timeline-content::after {
+                    content: '';
+                    position: absolute;
+                    border-style: solid;
+                    width: 0;
+                    height: 0;
+                    top: 30px;
+                    left: -15px;
+                    border-width: 10px 15px 10px 0;
+                    border-color: transparent #f5f5f5 transparent transparent;
+                }
+
+            .timeline-item::after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+
+        .timeline-content {
+            position: relative;
+            width: 45%;
+            padding: 10px 30px;
+            border-radius: 4px;
+            background: #f5f5f5;
+            box-shadow: 0 20px 25px -15px rgba(0, 0, 0, 0.3);
+        }
+
+            .timeline-content::after {
+                content: '';
+                position: absolute;
+                border-style: solid;
+                width: 0;
+                height: 0;
+                top: 30px;
+                right: -15px;
+                border-width: 10px 0 10px 15px;
+                border-color: transparent transparent transparent #f5f5f5;
+            }
+
+        .timeline-img {
+            width: 30px;
+            height: 30px;
+            background: #3F51B5;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            margin-top: 25px;
+            margin-left: -15px;
+        }
+
+        .pButton {
+            background: #3F51B5;
+            color: #FFFFFF;
+            padding: 8px 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            display: inline-block;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.6);
+        }
+
+
+
+            .pButton:hover, .pButton:active, .pButton:focus {
+                background: #32408f;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+
+
+
+
+
+        .timeline-card {
+            padding: 0 !important;
+        }
+
+            .timeline-card p {
+                padding: 0 20px;
+            }
+
+            .timeline-card a {
+                margin-left: 20px;
+            }
+
+
+        .timeline-img-header {
+            height: 200px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+            .timeline-img-header h2 {
+                color: #FFFFFF;
+                position: absolute;
+                bottom: 5px;
+                left: 20px;
+            }
+
+        blockquote {
+            margin-top: 30px;
+            color: #757575;
+            border-left-color: #3F51B5;
+            padding: 0 20px;
+        }
+
+        .date {
+            background: #FF4081;
+            display: inline-block;
+            color: #FFFFFF;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        @@media screen and (max-width: 768px) {
+            .timeline::before {
+                left: 50px;
+            }
+
+            .timeline .timeline-img {
+                left: 50px;
+            }
+
+            .timeline .timeline-content {
+                max-width: 100%;
+                width: auto;
+                margin-left: 70px;
+            }
+
+            .timeline .timeline-item:nth-child(even) .timeline-content {
+                float: none;
+            }
+
+            .timeline .timeline-item:nth-child(odd) .timeline-content::after {
+                content: '';
+                position: absolute;
+                border-style: solid;
+                width: 0;
+                height: 0;
+                top: 30px;
+                left: -15px;
+                border-width: 10px 15px 10px 0;
+                border-color: transparent #f5f5f5 transparent transparent;
+            }
+        }
+        .inner {
+            display: table; 
+            margin: 0 auto; 
+            color:white;
+            margin-top: 6px;
+
+        }
+
+        .sColor {
+        color:darkorange;
+        }
+        
+    </style>
+    <!-- Libraries for routing -->
+
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3&key=AIzaSyC8evo6K_89ZLTKCq4sJVG-RCQfjIqLa2c"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/Scripts/async.min.js"></script>
+
+    <script src="~/Scripts/jj.js"></script>
+    <script src="~/Scripts/gif.js"></script>
+
+
+    <!--for timeline -->
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <script type="text/javascript">
+        var centerLocation;
+
+        $(function () {
+
+            window.sr = ScrollReveal();
+
+            if ($(window).width() < 768) {
+
+                if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+                    $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+                }
+
+                sr.reveal('.js--fadeInRight', {
+                    origin: 'right',
+                    distance: '300px',
+                    easing: 'ease-in-out',
+                    duration: 800,
+                });
+
+            } else {
+
+                sr.reveal('.js--fadeInLeft', {
+                    origin: 'left',
+                    distance: '300px',
+                    easing: 'ease-in-out',
+                    duration: 800,
+                });
+
+                sr.reveal('.js--fadeInRight', {
+                    origin: 'right',
+                    distance: '300px',
+                    easing: 'ease-in-out',
+                    duration: 800,
+                });
+
+            }
+
+            sr.reveal('.js--fadeInLeft', {
+                origin: 'left',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+            sr.reveal('.js--fadeInRight', {
+                origin: 'right',
+                distance: '300px',
+                easing: 'ease-in-out',
+                duration: 800,
+            });
+
+
+        });
+
+
+        function updateTheme(pName) {
+            var selectedTheme = $('#slideTheme').val();
+            $('#theme').attr('href','/Travel/PackageSlide?PackageName=' + pName + '&slideTheme=' + selectedTheme);
+            console.log($('#theme').attr('href'));
+        }
+    </script>
+
+
+@{
+    List<PackageFormViewModel> pList = ViewBag.PFList;
+    PackageFormViewModel[] packageForm;
+    string pName = "", pMemo = "";
+    if (pList != null)
+    {
+        packageForm = pList.ToArray(); // check pList is null, todo: 從資料表中撈出來
+        pName = packageForm[0].PackageName;
+        pMemo = packageForm[0].PackageMemo;
+    }
+    else
+    {
+        packageForm = new PackageFormViewModel[] { };
+    }
+
+
+}
+
+
+    <header>
+        <div class="container text-center">
+            <!--
+                packageForm[0].PackageName
+                packageForm[0].PackageMemo
+            -->
+            <h1>@pName</h1>
+            <p>@pMemo</p>
+            <a class="pButton" style="background: #ff0000 " href="/Travel/PackageSlide?PackageName=@pName&slideTheme=black.css" id="theme">Play</a>
+            <select onchange="updateTheme('@pName')" id="slideTheme">
+                <option value="black.css" selected>black</option>
+                <option value="white.css">white</option>
+                <option value="solarized.css">solarized</option>
+                <option value="sky.css">sky</option>
+                <option value="league.css">league</option>
+
+            </select>
+
+        </div>
+    </header>
+    <section class="timeline">
+        <div class="container">
+            @{
+                //先用 Session["cart"] 模擬 Package 資料表 (p_id, PackageName, DateTime, Memo, Places); Place 資料表 (p_id, Place_Id, PlaceName, Address, Image, Rating, Lat, Lng )
+
+                if (packageForm != null)
+                {
+
+                    int i = 0, tempNo = 0;
+                    for (i = 0; i < packageForm.Length; i++)
+                    {
+
+                        tempNo = i + 1;
+                        if (i % 2 == 0)
+                        {
+                            <text>
+                                <div class="timeline-item">
+
+                                    <div class="timeline-img"><i class="fa fa-map-marker fa-lg inner" aria-hidden="true" ></i></div>
+
+                                    <div class="timeline-content timeline-card js--fadeInRight">
+                                        <div class="timeline-img-header" style="background: url('@packageForm[i].Image') center no-repeat; background-size: cover;">
+                                            <h2>@packageForm[i].PlaceName</h2>
+                                        </div>
+                                        <div class="date">@tempNo</div>
+                                        <p>@packageForm[i].Address</p>
+                                        <p><i class="fa fa-star sColor fa-lg" aria-hidden="true"></i>@packageForm[i].Rating</p>
+                                        <a class="pButton" href="/Travel/Pano?lat=@packageForm[i].Lat&lng=@packageForm[i].Lng&place_id=@packageForm[i].Place_Id">More</a>
+                                    </div>
+
+                                </div>
+                            </text>
+
+                            if (i == packageForm.Length - 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                <text>
+                                    <div class="timeline-item">
+
+                                        <div class="timeline-img"><i class="fa fa-car fa-lg inner" aria-hidden="true"></i></div>
+                                        <div class="timeline-content timeline-card js--fadeInRight">
+                                            <a class="pButton" onclick="showRoute('@packageForm[i].PlaceName','@packageForm[i+1].PlaceName','@packageForm[i].Lat,@packageForm[i].Lng','@packageForm[i+1].Lat,@packageForm[i+1].Lng','DRIVING')">Driving</a>
+                                            <a class="pButton" onclick="showRoute('@packageForm[i].PlaceName','@packageForm[i+1].PlaceName','@packageForm[i].Lat,@packageForm[i].Lng','@packageForm[i+1].Lat,@packageForm[i+1].Lng','TRANSIT')">Transit</a>
+                                        </div>
+
+
+                                    </div>
+                                </text>
+                            }
+                        }
+                        else
+                        {
+                            <text>
+                                <div class="timeline-item">
+
+                                    <div class="timeline-img"><i class="fa fa-map-marker fa-lg inner" aria-hidden="true"></i></div>
+
+                                    <div class="timeline-content timeline-card js--fadeInLeft">
+                                        <div class="timeline-img-header" style="background: url('@packageForm[i].Image') center no-repeat; background-size: cover;">
+                                            <h2>@packageForm[i].PlaceName</h2>
+                                        </div>
+                                        <div class="date">@tempNo</div>
+                                        <p>@packageForm[i].Address</p>
+                                        <p><i class="fa fa-star sColor fa-lg" aria-hidden="true"></i>@packageForm[i].Rating</p>
+                                        <a class="pButton" href="/Travel/Pano?lat=@packageForm[i].Lat&lng=@packageForm[i].Lng&place_id=@packageForm[i].Place_Id">More</a>
+                                    </div>
+
+                                </div>
+                            </text>
+
+                            if (i == packageForm.Length - 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                <text>
+                                    <div class="timeline-item">
+
+                                        <div class="timeline-img"><i class="fa fa-car fa-lg inner" aria-hidden="true"></i></div>
+                                        <div class="timeline-content timeline-card js--fadeInLeft">
+                                            <a class="pButton" onclick="showRoute('@packageForm[i].PlaceName','@packageForm[i+1].PlaceName','@packageForm[i].Lat,@packageForm[i].Lng','@packageForm[i+1].Lat,@packageForm[i+1].Lng','DRIVING')">Driving</a>
+                                            <a class="pButton" onclick="showRoute('@packageForm[i].PlaceName','@packageForm[i+1].PlaceName','@packageForm[i].Lat,@packageForm[i].Lng','@packageForm[i+1].Lat,@packageForm[i+1].Lng','TRANSIT')">Transit</a>
+
+                                        </div>
+
+
+                                    </div>
+                                </text>
+                            }
+                        }
+
+
+
+
+
+                    }// end foreach
+                }
+
+            }
+        </div>
+    </section>
+
+    <form id="mainform" class="form-horizontal" onsubmit="initMovie();return false">
+        <div class="form-group">
+            <label for="origin" class="col-sm-2 control-label">Origin</label>
+            <div class="col-sm-10">
+                <input name="origin" class="form-control" onchange="buildLink()" placeholder="origin" type="text" id="origin" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="destination" class="col-sm-2 control-label">Destination</label>
+            <div class="col-sm-10">
+                <input name="destination" class="form-control" onchange="buildLink()" placeholder="destination" type="text" id="destination" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input name="advanced" id="advanced" type="checkbox" onclick="toggleAdvanced(this)"> Advanced Options
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="advanced-area" class="hidden">
+            <div class="form-group">
+                <label for="fps" class="col-sm-2 control-label">FPS</label>
+                <div class="col-sm-10">
+                    <input name="fps" class="form-control" onchange="buildLink()" placeholder="frames per second" type="text" id="fps" value="1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="travelmode" class="col-sm-2 control-label">Travel mode</label>
+                <div class="col-sm-10">
+                    <select name="travelmode" class="form-control" onchange="buildLink()" id="travelmode">
+                        <option value="DRIVING" selected>Driving</option>
+                        <option value="BICYCLING">Bicycling</option>
+                        <option value="TRANSIT">Transit</option>
+                        <option value="WALKING">Walking</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gxp-file" class="col-sm-2 control-label">Upload coordinates (gxp or kml)</label>
+                <div class="col-sm-10">
+                    <input type="file" id="gxp-file" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="routename" class="col-sm-2 control-label">Route Name</label>
+                <div class="col-sm-10">
+                    <input type="text" id="routename" name="rn" onchange="buildLink()" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="export-width" class="col-sm-2 control-label">Export Width</label>
+                <div class="col-sm-10">
+                    <input type="text" id="export-width" name="exportWidth" class="form-control" value="512" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="export-height" class="col-sm-2 control-label">Export Height</label>
+                <div class="col-sm-10">
+                    <input type="text" id="export-height" name="exportHeight" class="form-control" value="512" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" value="Play" />
+            </div>
+        </div>
+    </form>
+
+
+
+    <script type="text/javascript">
+
+        $("#mainform").hide();
+
+        function showRoute(cPName, nPName, o, d, mode) {
+            $("#routeModal").modal('show');
+
+            $("#travelmode").val(mode);
+            $("#origin").val(o);
+            $("#destination").val(d);
+
+            $("#mainform").submit();
+
+            $('#route-name-label').text(cPName + ' to ' + nPName);
+        }
+
+    </script>
+
+    <!-- Route Modal -->
+    <div class="modal fade" id="routeModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">路線規劃</h4>
+                    <div id="stage" style="display:none"></div>
+                    <div id="statusbox" class="alert alert-danger" style="display:none"></div>
+                    <span style="float:right" id="route-distance"></span>
+                    <span id="route-name-label"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col-md-12">
+                            <div id="canvas-wrap">
+                                <canvas id="draw" height="400"></canvas>
+                                <div id="map"></div>
+                            </div>
+                            <div id="progress" class="progress">
+                                <div class="progress-bar progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progressbar" style="width:0%"></div>
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="bufferbar" style="width:0%"></div>
+                            </div>
+                            <div class="btn-group" id="controls" style="visibility:hidden;height:20px;margin-bottom:20px">
+                                <button title="Pause" type="button" class="btn btn-sm btn-primary" id="btn_playpause" onclick="pauseMovie(this)"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-sm" aria-label="Slower" onclick="slowDownMovie()" title="Slower"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-sm" aria-label="Faster" title="Faster" onclick="speedUpMovie()"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-sm" aria-label="Download" title="Download" data-toggle="modal" data-target="#downloadModal"><span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-sm" aria-label="Share" title="Share" onclick="shareMovie()" data-toggle="modal" data-target="#shareModal"><span class="glyphicon glyphicon-share" aria-hidden="true"></span></button>
+                                <button type="button" class="btn btn-sm" aria-label="Fullscreen" title="Fullscreen" onclick="fullScreen()"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="directions"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="elevation_chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+<!--
+centerLocation = e.overview_path[0],
+$("#routeModal").on('shown.bs.modal', function () {
+    google.maps.event.trigger(C, "resize"); // map 在 modal 要 resize 否則會有問題
+    C.setCenter(centerLocation);
+    C.setZoom(14);
+});*/
+-->
