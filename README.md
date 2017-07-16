@@ -11,5 +11,5 @@ https://sharetravel01.azurewebsites.net
 <li>溝通分享：行程自動轉成線上簡報。</li>
 </ul>
 
-
+採用RWD設計開發，可在iOS與Android手機上正常運作。
 
